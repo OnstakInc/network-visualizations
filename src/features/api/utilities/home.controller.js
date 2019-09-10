@@ -8,8 +8,8 @@ router.get('/', async (req, res, next) => {
     try {
         return res.json({
             version: '1.0',
-            service: 'identity',
-            description: 'Identity - Enterprise Authentication Service',
+            service: 'network-visualizations',
+            description: 'TEC - Network Visualizations',
             timestamp: moment()
         });
     } catch (err) {
