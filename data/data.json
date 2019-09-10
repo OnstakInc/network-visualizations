@@ -1,0 +1,120 @@
+[
+    {
+        "id": 1,
+        "displayName": "Main Server",
+        "name": "main_server",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": [
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 2,
+        "displayName": "Child Server 01",
+        "name": "child_server_01",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": [
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 3,
+        "displayName": "Child Server 02",
+        "name": "child_server_02",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": [
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 4,
+        "displayName": "Child Server 03",
+        "name": "child_server_03",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": [
+            5,
+            6,
+            7
+        ]
+    },
+    {
+        "id": 5,
+        "displayName": "Sub Child Server 01",
+        "name": "sub_child_server_01",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": [
+            8
+        ]
+    },
+    {
+        "id": 6,
+        "displayName": "Sub Child Server 02",
+        "name": "sub_child_server_02",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": [
+            8
+        ]
+    },
+    {
+        "id": 7,
+        "displayName": "Sub Child Server 03",
+        "name": "sub_child_server_03",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": [
+            8
+        ]
+    },
+    {
+        "id": 8,
+        "displayName": "Consumer00",
+        "name": "consumer_00",
+        "ipAddress": "127.0.0.1",
+        "portGroup": {
+            "name": "Port 01",
+            "port": 8080,
+            "status": "Ok"
+        },
+        "childNodes": []
+    }
+]
