@@ -20,7 +20,7 @@ const NodeSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    portGroups: {
+    portGroup: {
         type: mongoose.SchemaTypes.Mixed
     },
     childNodes: {
