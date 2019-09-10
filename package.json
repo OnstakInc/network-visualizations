@@ -1,6 +1,6 @@
 {
-    "name": "identity",
-    "description": "Identity - Enterprise Authentication Service",
+    "name": "network-visualizations",
+    "description": "Network Visualizations",
     "version": "1.0.0",
     "private": true,
     "scripts": {
