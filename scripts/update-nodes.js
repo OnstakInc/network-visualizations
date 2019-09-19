@@ -21,14 +21,22 @@ const updateNodes = setInterval(async () => {
                         // eslint-disable-next-line require-atomic-updates
                         node.portGroup.status = 'Ok';
 
-                        await Node.findByIdAndUpdate(node._id, node);
+                        await Node.findByIdAndUpdate(node._id, {
+                            $set: {
+                                portGroup: node.portGroup
+                            }
+                        });
 
                     } else {
 
                         // eslint-disable-next-line require-atomic-updates
                         node.portGroup.status = 'Unreachable';
 
-                        await Node.findByIdAndUpdate(node._id, node);
+                        await Node.findByIdAndUpdate(node._id, {
+                            $set: {
+                                portGroup: node.portGroup
+                            }
+                        });
 
                     }
 
@@ -39,7 +47,11 @@ const updateNodes = setInterval(async () => {
                     // eslint-disable-next-line require-atomic-updates
                     node.portGroup.status = 'Unreachable';
 
-                    await Node.findByIdAndUpdate(node._id, { $set: node });
+                    await Node.findByIdAndUpdate(node._id, {
+                        $set: {
+                            portGroup: node.portGroup
+                        }
+                    });
                 });
         });
 

@@ -2,29 +2,54 @@
 
 <head>
     <title>Network Visualization</title>
+    <script src="/public/js/vizceral.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="/public/scripts/vis-network.js"></script>
-    <script src="/public/scripts/vis.animate.js"></script>
-    <link rel="stylesheet" href="/public/css/vis-network.css">
+    <style>
+        body {
+            background: #353535;
+            overflow: hidden;
+        }
 
-    <style type="text/css">
-        #mynetwork {
-            width: 600px;
-            height: 400px;
-            border: 1px solid lightgray;
+        .navbar {
+            background: #101010 !important;
+        }
+
+        .navbar-brand {
+            color: #f4f4f4 !important;
+            letter-spacing: 2;
         }
     </style>
-
 </head>
 
 <body>
 
-    <div id="mynetwork"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top">
+        <a class="navbar-brand" href="#">TEC - Network Visualization</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">v1.0</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <canvas id='vizceral'></canvas>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -33,80 +58,154 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
-
-    <!-- <script src="/public/scripts/jsnetworkx.js"></script> -->
-
-
     <script>
 
         $(document).ready(function () {
 
-            var nodes = [];
-            var edges = [];
+            var viz = new Vizceral.default(document.getElementById('vizceral'));
 
-            $.ajax({
-                method: 'GET',
-                url: '/api/v1/nodes',
-                success: function (data) {
+            var data = {
+                name: 'us-west-2',
+                renderer: 'region',
+                layout: 'ltrTree',
+                maxVolume: 500,
+                nodes: [
+                    { name: 'Internet' },
+                    { name: 'Load Balancer' },
+                    { name: 'API Service' },
+                    { name: 'SMTP', notices: [{ severity: 1 }] },
+                    { name: 'Cache' },
+                ],
+                connections: [
+                    {
+                        source: 'Internet',
+                        target: 'Load Balancer',
+                        metrics: { normal: 14 },
+                        metadata: { streaming: true }
+                    },
+                    {
+                        source: 'Load Balancer',
+                        target: 'API Service',
+                        metrics: { danger: 10 },
+                        notices: [{
+                            severity: 2
+                        }],
+                        metadata: { streaming: true }
+                    },
+                    {
+                        source: 'Load Balancer',
+                        target: 'SMTP',
+                        metrics: { warning: 12 },
+                        notices: [{
+                            severity: 1
+                        }],
+                        metadata: { streaming: true }
+                    },
+                    {
+                        source: 'Load Balancer',
+                        target: 'Cache',
+                        metrics: { normal: 15 },
+                        metadata: { streaming: true }
+                    }
+                ]
+            }
 
-                    data.forEach(function (node) {
-                        nodes.push({
-                            id: node.id,
-                            label: node.displayName
-                        });
+            viz.updateData(data);
 
-                        node.childNodes.forEach(function(childNode) {
-                            edges.push({
-                                from: node.id,
-                                to: childNode
+            // viz.updateStyles({
+            //     colorTraffic: {
+            //         normal: 'rgb(40, 160, 40)',
+            //         warning: 'rgb(268, 185, 73)',
+            //         danger: 'rgb(184, 36, 36)',
+            //     }
+            // });
+
+            viz.setView();
+            viz.animate();
+
+            updateTraffic();
+
+            var sync = setInterval(function () {
+                updateTraffic();
+            }, 5000);
+
+            function updateTraffic() {
+                $.ajax({
+                    url: '/api/v1/nodes',
+                    method: 'GET',
+                    success: function (result) {
+
+                        data.nodes = getNodes(result);
+                        data.connections = getConnections(result);
+
+                        viz.updateData(data);
+                    }
+                });
+            }
+
+            function getNodes(result) {
+                var nodes = [];
+
+                result.forEach(e => {
+
+                    if (e.portGroup.status == 'Ok') {
+                        nodes.push({ name: e.displayName });
+                    } else {
+                        nodes.push({ name: e.displayName, notices: [{ severity: 2 }] });
+                    }
+
+                });
+
+                console.log(nodes);
+
+                return nodes;
+            }
+
+            function getConnections(result) {
+                var connections = [];
+
+                result.forEach(function (e) {
+
+                    e.childNodes.forEach(function (c) {
+
+                        var childNode = findNodeNameById(c, result);
+
+                        if (childNode.portGroup.status == 'Ok') {
+                            connections.push({
+                                source: e.displayName,
+                                target: childNode.displayName,
+                                metrics: { normal: 12 },
+                                metadata: { streaming: true }
                             });
-                        });
-
+                        } else {
+                            connections.push({
+                                source: e.displayName,
+                                target: childNode.displayName,
+                                metrics: { danger: 10.1 },
+                                notices: [{ severity: 2 }],
+                                metadata: { streaming: true }
+                            });
+                        }
                     });
 
-                    render(nodes, edges);
-                }
-            });
+                });
+
+                console.log(connections);
+
+                return connections;
+            }
+
+            function findNodeNameById(id, result) {
+                return result.find(function (e) {
+                    return e.id == id;
+                });
+            }
+
 
         });
 
-        function render(nodes, edges) {
-            // create an array with nodes
-            var nodes = new vis.DataSet(nodes);
-
-            // create an array with edges
-            var edges = new vis.DataSet(edges);
-
-            // create a network
-            var container = document.getElementById('mynetwork');
-
-            // provide the data in the vis format
-            var data = {
-                nodes: nodes,
-                edges: edges
-            };
-            var options = {
-                physics: false,
-                edges: {
-                    color: { color: 'red', inherit: false },
-                    smooth: false
-                }
-            }
-
-            // initialize your network!
-            var network = new vis.Network(container, data, options);
-
-            // network.animateTraffic([
-            //     { edge: 2 },                           // specify forward animation with traffic size=1
-            //     { edge: 2, trafficSize: 4 },            // specify the size of traffic (circle animated)
-            //     { edge: 4, trafficSize: 4, isBackward: true }   // animates the traffic backward on the edge
-            // ]);
-        }
-
-
-
     </script>
+
 </body>
 
 </html>
