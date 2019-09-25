@@ -3,7 +3,7 @@
         "id": 0,
         "displayName": "Internet",
         "name": "internet",
-        "ipAddress": "127.0.0.1",
+        "ipAddress": "172.16.187.131",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -15,9 +15,9 @@
     },
     {
         "id": 1,
-        "displayName": "Main Server",
-        "name": "main_server",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Virtual Router",
+        "name": "virtual_router",
+        "ipAddress": "172.16.187.131",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -30,9 +30,9 @@
     },
     {
         "id": 2,
-        "displayName": "Child Server 01",
-        "name": "child_server_01",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Web Server",
+        "name": "web_server",
+        "ipAddress": "172.16.187.132",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -47,9 +47,9 @@
     },
     {
         "id": 3,
-        "displayName": "Child Server 02",
-        "name": "child_server_02",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Job Server",
+        "name": "job_server",
+        "ipAddress": "172.16.187.133",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -64,9 +64,9 @@
     },
     {
         "id": 4,
-        "displayName": "Sub Child Server 01",
-        "name": "sub_child_server_01",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Authentication",
+        "name": "authentication",
+        "ipAddress": "172.16.187.134",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -75,15 +75,14 @@
         "childNodes": [
             8,
             9,
-            10,
-            11
+            10
         ]
     },
     {
         "id": 5,
-        "displayName": "Sub Child Server 02",
-        "name": "sub_child_server_02",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Clusters",
+        "name": "clusters",
+        "ipAddress": "172.16.187.135",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -92,15 +91,14 @@
         "childNodes": [
             8,
             9,
-            10,
-            11
+            10
         ]
     },
     {
         "id": 6,
-        "displayName": "Sub Child Server 03",
-        "name": "sub_child_server_03",
-        "ipAddress": "127.0.0.1",
+        "displayName": "REST Server",
+        "name": "rest_server",
+        "ipAddress": "172.16.187.136",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -109,15 +107,14 @@
         "childNodes": [
             8,
             9,
-            10,
-            11
+            10
         ]
     },
     {
         "id": 7,
-        "displayName": "Sub Child Server 04",
-        "name": "sub_child_server_04",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Static Content",
+        "name": "static_content",
+        "ipAddress": "172.16.187.137",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
@@ -126,76 +123,49 @@
         "childNodes": [
             8,
             9,
-            10,
-            11
+            10
         ]
     },
     {
         "id": 8,
-        "displayName": "Zero Child Server 01",
-        "name": "zero_child_server_01",
-        "ipAddress": "127.0.0.1",
+        "displayName": "MySQL Database",
+        "name": "mysql",
+        "ipAddress": "172.16.187.138",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
             "status": "Ok"
         },
         "childNodes": [
-            12
+
         ]
     },
     {
         "id": 9,
-        "displayName": "Zero Child Server 02",
-        "name": "zero_child_server_02",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Cache",
+        "name": "cache",
+        "ipAddress": "172.16.187.139",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
             "status": "Ok"
         },
         "childNodes": [
-            12
+
         ]
     },
     {
         "id": 10,
-        "displayName": "Zero Child Server 03",
-        "name": "zero_child_server_03",
-        "ipAddress": "127.0.0.1",
+        "displayName": "Logging",
+        "name": "logging",
+        "ipAddress": "172.16.187.140",
         "portGroup": {
             "name": "Port 01",
             "port": 8080,
             "status": "Ok"
         },
         "childNodes": [
-            12
+
         ]
-    },
-    {
-        "id": 11,
-        "displayName": "Zero Child Server 04",
-        "name": "zero_child_server_04",
-        "ipAddress": "127.0.0.1",
-        "portGroup": {
-            "name": "Port 01",
-            "port": 8080,
-            "status": "Ok"
-        },
-        "childNodes": [
-            12
-        ]
-    },
-    {
-        "id": 12,
-        "displayName": "Consumer",
-        "name": "consumer",
-        "ipAddress": "127.0.0.1",
-        "portGroup": {
-            "name": "Port 01",
-            "port": 8080,
-            "status": "Ok"
-        },
-        "childNodes": []
     }
 ]
