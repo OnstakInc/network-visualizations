@@ -15,7 +15,7 @@
     },
     {
         "id": 1,
-        "displayName": "Load Balancer",
+        "displayName": "Load Balancer (172.16.187.131)",
         "name": "virtual_router",
         "ipAddress": "172.16.187.131",
         "portGroup": {
@@ -30,7 +30,7 @@
     },
     {
         "id": 2,
-        "displayName": "Web Server",
+        "displayName": "Web Server (172.16.187.132)",
         "name": "web_server",
         "ipAddress": "172.16.187.132",
         "portGroup": {
@@ -47,7 +47,7 @@
     },
     {
         "id": 3,
-        "displayName": "Job Server",
+        "displayName": "Job Server (172.16.187.133)",
         "name": "job_server",
         "ipAddress": "172.16.187.133",
         "portGroup": {
@@ -64,7 +64,7 @@
     },
     {
         "id": 4,
-        "displayName": "Authentication",
+        "displayName": "Authentication (172.16.187.134)",
         "name": "authentication",
         "ipAddress": "172.16.187.134",
         "portGroup": {
@@ -80,7 +80,7 @@
     },
     {
         "id": 5,
-        "displayName": "Clusters",
+        "displayName": "Clusters (172.16.187.135)",
         "name": "clusters",
         "ipAddress": "172.16.187.135",
         "portGroup": {
@@ -96,7 +96,7 @@
     },
     {
         "id": 6,
-        "displayName": "REST Server",
+        "displayName": "REST Server (172.16.187.136)",
         "name": "rest_server",
         "ipAddress": "172.16.187.136",
         "portGroup": {
@@ -112,7 +112,7 @@
     },
     {
         "id": 7,
-        "displayName": "Static Content",
+        "displayName": "Static Content (172.16.187.137)",
         "name": "static_content",
         "ipAddress": "172.16.187.137",
         "portGroup": {
@@ -128,7 +128,7 @@
     },
     {
         "id": 8,
-        "displayName": "MySQL Database",
+        "displayName": "MySQL Database (172.16.187.138)",
         "name": "mysql",
         "ipAddress": "172.16.187.138",
         "portGroup": {
@@ -142,7 +142,7 @@
     },
     {
         "id": 9,
-        "displayName": "Cache",
+        "displayName": "Cache (172.16.187.139)",
         "name": "cache",
         "ipAddress": "172.16.187.139",
         "portGroup": {
@@ -156,7 +156,7 @@
     },
     {
         "id": 10,
-        "displayName": "Logging",
+        "displayName": "Logging (172.16.187.140)",
         "name": "logging",
         "ipAddress": "172.16.187.140",
         "portGroup": {
